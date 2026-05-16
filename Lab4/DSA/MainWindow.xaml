@@ -1,0 +1,362 @@
+﻿<Window x:Class="DSA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DSA Digital Signature"
+        Background="#282828"
+        MinWidth="900" MinHeight="700"
+        FontSize="24" Height="789">
+
+    <Grid Margin="18">
+
+        <!-- ДВЕ КОЛОНКИ -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ================= LEFT ================= -->
+        <Grid Grid.Column="0" Margin="0,0,12,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- параметры -->
+                <RowDefinition Height="Auto"/>
+                <!-- ключи -->
+                <RowDefinition Height="Auto"/>
+                <!-- кнопки -->
+            </Grid.RowDefinitions>
+
+            <!-- PARAMETERS -->
+            <Border Grid.Row="0"
+                    Background="#353535"
+                    CornerRadius="18"
+                    Padding="18"
+                    Margin="0,0,0,12">
+
+                <StackPanel>
+
+                    <TextBlock Text="DSA Parameters"
+                               FontFamily="Harrington"
+                               FontSize="32"
+                               Foreground="#FF9DC3F6"
+                               Margin="0,0,0,10"
+                               HorizontalAlignment="Center"/>
+
+                    <Grid Margin="20,0,20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <Grid.Resources>
+
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="0,6,10,6"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Foreground" Value="#FF9DC3F6"/>
+                                <Setter Property="FontFamily" Value="Harrington"/>
+                            </Style>
+
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="0,6,0,6"/>
+                                <Setter Property="Height" Value="40"/>
+                                <Setter Property="Background" Value="#FFEDB1CC"/>
+                                <Setter Property="FontFamily" Value="Harrington"/>
+                            </Style>
+
+                        </Grid.Resources>
+
+                        <TextBlock Text="p:" Grid.Row="0"/>
+                        <TextBox x:Name="pBox" Grid.Row="0" Grid.Column="1" Margin="0,6,0,6"/>
+
+                        <TextBlock Text="q:" Grid.Row="1"/>
+                        <TextBox x:Name="qBox" Grid.Row="1" Grid.Column="1"/>
+
+                        <TextBlock Text="h:" Grid.Row="2"/>
+                        <TextBox x:Name="hBox" Grid.Row="2" Grid.Column="1"/>
+
+                        <TextBlock Text="x:" Grid.Row="3"/>
+                        <TextBox x:Name="xBox" Grid.Row="3" Grid.Column="1"/>
+
+                        <TextBlock Text="k:" Grid.Row="4"/>
+                        <TextBox x:Name="kBox" Grid.Row="4" Grid.Column="1"/>
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- GENERATED -->
+            <Border Grid.Row="1"
+        Background="#353535"
+        CornerRadius="18"
+        Padding="18"
+        Margin="0,0,0,12">
+
+                <StackPanel>
+
+                    <TextBlock Text="Generated Keys"
+                   FontFamily="Harrington"
+                   FontSize="30"
+                   Foreground="#FF9DC3F6"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,10"/>
+
+                    <Grid Margin="20,0,20,0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- g -->
+                        <TextBlock Text="g:"
+                       Grid.Row="0" Grid.Column="0"
+                       Margin="0,6,10,6"
+                       VerticalAlignment="Center"
+                       FontSize="24"
+                       FontFamily="Harrington"
+                       Foreground="#FF9DC3F6"/>
+
+                        <TextBox x:Name="gBox"
+                     Grid.Row="0" Grid.Column="1"
+                     Margin="0,6,0,6"
+                     Height="40"
+                     FontSize="20"
+                     IsReadOnly="True"
+                     FontFamily="Harrington"
+                     Background="#FFEDB1CC"/>
+
+                        <!-- y -->
+                        <TextBlock Text="y:"
+                       Grid.Row="1" Grid.Column="0"
+                       Margin="0,6,10,6"
+                       VerticalAlignment="Center"
+                       FontSize="24"
+                       FontFamily="Harrington"
+                       Foreground="#FF9DC3F6"/>
+
+                        <TextBox x:Name="yBox"
+                     Grid.Row="1" Grid.Column="1"
+                     Margin="0,6,0,6"
+                     Height="40"
+                     FontSize="20"
+                     IsReadOnly="True"
+                     FontFamily="Harrington"
+                     Background="#FFEDB1CC"/>
+
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <!-- КНОПКИ ВСЕГДА СНИЗУ -->
+            <StackPanel Grid.Row="3"
+                        >
+
+                <Button Content="Generate Keys"
+                        Height="50"
+                        Margin="0,0,0,10"
+                        FontFamily="Harrington"
+                        Background="#FF9DC3F6"
+                        Click="GenerateKeys_Click"/>
+
+                <Button Content="Sign File"
+                        Height="50"
+                        Margin="0,0,0,10"
+                        FontFamily="Harrington"
+                        Background="#FF9DC3F6"
+                        Click="Sign_Click"/>
+
+                <Button Content="Verify Signature"
+                        Height="50"
+                        FontFamily="Harrington"
+                        Background="#FF9DC3F6"
+                        Click="Verify_Click"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <!-- ================= RIGHT ================= -->
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- FILES -->
+            <Border Grid.Row="0"
+                    Background="#353535"
+                    CornerRadius="18"
+                    Padding="18"
+                    Margin="0,0,0,12">
+
+                <StackPanel>
+
+                    <TextBlock Text="Files"
+                               FontFamily="Harrington"
+                               FontSize="32"
+                               Foreground="#FF9DC3F6"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"/>
+
+                    <DockPanel Margin="0,0,0,10">
+                        <Button Content="Browse..."
+                                DockPanel.Dock="Right"
+                                Width="120"
+                                Height="40"
+                                Background="#FF9DC3F6"
+                                Click="SelectSignFile_Click" FontFamily="Harrington"/>
+                        <TextBox Name="signFileBox"
+                                 Height="40"
+                                 Background="#FFEDB1CC"/>
+                    </DockPanel>
+
+                    <DockPanel>
+                        <Button Content="Browse..."
+                                DockPanel.Dock="Right"
+                                Width="120"
+                                Height="40"
+                                Background="#FF9DC3F6"
+                                Click="SelectVerifyFile_Click" FontFamily="Harrington"/>
+                        <TextBox Name="verifyFileBox"
+                                 Height="40"
+                                 Background="#FFEDB1CC"/>
+                    </DockPanel>
+
+                </StackPanel>
+            </Border>
+
+            <!-- HASH / SIGN -->
+            <Border Grid.Row="1"
+                    Background="#353535"
+                    CornerRadius="18"
+                    Padding="18"
+                    Margin="0,0,0,12">
+
+                <UniformGrid Columns="3">
+
+                    <StackPanel Margin="30,6,15,6">
+                        <TextBlock Text="Hash" HorizontalAlignment="Center" FontFamily="Harrington" Foreground="#FF9DC3F6"/>
+                        <TextBox Name="hashBox" Height="40" Background="#FFEDB1CC"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="16,6,20,6">
+                        <TextBlock Text="R" HorizontalAlignment="Center" FontFamily="Harrington" Foreground="#FF9DC3F6"/>
+                        <TextBox Name="rBox" Height="40" Background="#FFEDB1CC"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="6,6,30,6">
+                        <TextBlock Text="S" HorizontalAlignment="Center" FontFamily="Harrington" Foreground="#FF9DC3F6"/>
+                        <TextBox Name="sBox" Height="40" Background="#FFEDB1CC"/>
+                    </StackPanel>
+
+                </UniformGrid>
+            </Border>
+
+            <!-- OUTPUT -->
+            <Grid Grid.Row="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- VERIFICATION -->
+                <Border Grid.Column="0"
+        Background="#353535"
+        CornerRadius="18"
+        Padding="18"
+        Margin="0,0,10,0">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- заголовок -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- статус -->
+                            <RowDefinition Height="*"/>
+                            <!-- текст -->
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Verification"
+                   FontSize="28"
+                   FontFamily="Harrington"
+                   Foreground="#FF9DC3F6"
+                   HorizontalAlignment="Center"/>
+
+                        <TextBlock Name="verificationResult"
+                   Grid.Row="1"
+                   Margin="0,20,0,2"
+                   TextAlignment="Center" FontFamily="Harrington" Foreground="#FFEDB1CC" FontWeight="Bold" Text="Valid?"/>
+
+                        <TextBox Name="verificationBox"
+                 Grid.Row="2"
+                 Margin="0,10,0,0"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 TextWrapping="Wrap"
+                 IsReadOnly="True"
+                 Background="#FFEDB1CC" FontFamily="Harrington"/>
+
+                    </Grid>
+                </Border>
+
+                <!-- LOG -->
+                <Border Grid.Column="1"
+        Background="#353535"
+        CornerRadius="18"
+        Padding="18">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- заголовок -->
+                            <RowDefinition Height="*"/>
+                            <!-- текст -->
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Log"
+                   FontSize="28"
+                   FontFamily="Harrington"
+                   Foreground="#FF9DC3F6"
+                   HorizontalAlignment="Center"/>
+
+                        <TextBox Name="logBox"
+                 Grid.Row="1"
+                 Margin="0,52,0,0"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 TextWrapping="Wrap"
+                 IsReadOnly="True"
+                 Background="#FFEDB1CC" FontFamily="Harrington"/>
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Window>
